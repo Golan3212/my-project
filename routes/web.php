@@ -26,5 +26,5 @@ Route::get('/info/{project}', static function(string $project):string {
 });
 
 Route::get('/news/{id}', static function(int $id):string {
-    return "news number $id";
+    return "news number with id $id";
 });
