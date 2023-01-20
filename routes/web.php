@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,19 +15,29 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [WelcomeController::class, 'welcome'])
+    ->name('main');
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/hello/{name}', static function(string $name):string {
- return "Hello, {$name}";
-});
+Route::get('/sendNews', [NewsController::class, 'send'])
+    ->name('news.send');
 
 Route::get('/info/{project}', static function(string $project):string {
     return "About {$project}";
 });
 
-Route::get('/news/{id}', static function(int $id):string {
-    return "news number with id $id";
+Route::group(['prefix'=>''], static function(){
+    Route::get('/news', [NewsController::class, 'index'])
+        ->name('news');
+
+    Route::get('/category', [CategoryController::class, 'categoryNews'])
+        ->name('news.category');
+
+    Route::get('/category/{id}/show', [CategoryController::class, 'showCategoryNews'])
+        ->name('news.categoryNews')
+        ->where('id', '\d+');
+
+    Route::get('/news/{id}/show', [NewsController::class, 'show'])
+        ->name('news.show')
+        ->where('id', '\d+');
 });
+
