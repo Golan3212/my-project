@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\IndexController as Admin;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\WelcomeController;
@@ -23,6 +24,12 @@ Route::get('/sendNews', [NewsController::class, 'send'])
 
 Route::get('/info/{project}', static function(string $project):string {
     return "About {$project}";
+});
+
+//admin
+Route::group(['prefix'=>'admin'], static function(){
+    Route::get('/', Admin::class)
+    ->name('admin.index');
 });
 
 Route::group(['prefix'=>''], static function(){
