@@ -4,13 +4,13 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link @if(request()->routeIs('admin.index')) active @endif" href="{{route('admin.index')}}">
                             <span data-feather="home"></span>
                             Main <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link @if(request()->routeIs('admin.news.*')) active @endif" href="{{route('admin.news.create')}}">
                             <span data-feather="file"></span>
                             News
                         </a>
@@ -23,7 +23,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link @if(request()->routeIs('admin.category.index')) active @endif" href="{{route('admin.category.index')}}">
                             <span data-feather="layers"></span>
                             Categories
                         </a>
@@ -32,8 +32,6 @@
             </div>
         </nav>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            @yield('content')
-        </main>
+
     </div>
 </div>

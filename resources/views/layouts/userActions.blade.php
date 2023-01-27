@@ -9,7 +9,7 @@
 
 
     <!-- Bootstrap core CSS -->
-        <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
@@ -43,30 +43,30 @@
 
 
 
-<main role="main" class="container">
+    <main role="main" class="container">
 
-    <br>
-    @yield('content')
+        <br>
+        @yield('content')
 
-</main><!-- /.container -->
+    </main><!-- /.container -->
 
     <x-footer></x-footer>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
-<script src="{{asset('assets/js/popper.min.js')}}"></script>
-<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/js/holder.min.js')}}"></script>
-<script>
-    Holder.addTheme('thumb', {
-        bg: '#55595c',
-        fg: '#eceeef',
-        text: 'Thumbnail'
-    });
-</script>
+    <script src="{{asset('assets/js/popper.min.js')}}"></script>
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/js/holder.min.js')}}"></script>
+    <script>
+        Holder.addTheme('thumb', {
+            bg: '#55595c',
+            fg: '#eceeef',
+            text: 'Thumbnail'
+        });
+    </script>
 </body>
 </html>
 

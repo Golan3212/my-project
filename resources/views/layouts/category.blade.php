@@ -20,7 +20,7 @@
 
 <main role="main">
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <!-- Main jumbotron for a primary marketing message or call to download -->
 
     <div class="container">
         <!-- Example row of columns -->

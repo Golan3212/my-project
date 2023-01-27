@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\IndexController as Admin;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\User\DownloadController;
+use App\Http\Controllers\User\FeedbackController;
+use App\Http\Controllers\User\IndexController as User;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,9 +32,18 @@ Route::get('/info/{project}', static function(string $project):string {
 });
 
 //admin
-Route::group(['prefix'=>'admin'], static function(){
+Route::group(['prefix'=>'admin', 'as'=>'admin.'], static function(){
     Route::get('/', Admin::class)
-    ->name('admin.index');
+    ->name('index');
+    Route::resource('category', AdminCategoryController::class);
+    Route::resource('news', AdminNewsController::class);
+});
+//User
+Route::group(['prefix'=>'user', 'as'=>'user.'], static function(){
+    Route::get('/', User::class)
+        ->name('index');
+    Route::resource('feedback', FeedbackController::class);
+    Route::resource('download', DownloadController::class);
 });
 
 Route::group(['prefix'=>''], static function(){

@@ -1,4 +1,5 @@
 
+
     <div class="alert alert-{{ $type }} alert-dismissible fade show" role="alert">
         <strong>   {{ $message }}</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

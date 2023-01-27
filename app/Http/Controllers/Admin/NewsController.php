@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -12,9 +14,9 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() : View
     {
-        //
+       return \view('admin.news.index');
     }
 
     /**
@@ -22,9 +24,9 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return \view('admin.news.create');
     }
 
     /**
@@ -35,7 +37,9 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json($request->only(['title', 'author', 'description']));
+
+
     }
 
     /**

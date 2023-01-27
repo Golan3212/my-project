@@ -1,0 +1,6 @@
+HTTP/1.0 200 OK
+Cache-Control: no-cache, private
+Content-Type:  application/json
+Date:          Fri, 27 Jan 2023 14:51:32 GMT
+
+{"author":"golan4ek","comment":"privet"}

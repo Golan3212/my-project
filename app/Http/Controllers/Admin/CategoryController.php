@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+//use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
@@ -12,9 +14,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() :View
     {
-        //
+        return \view('admin.category.index');
     }
 
     /**
@@ -22,9 +24,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return \view('admin.category.create');
     }
 
     /**
