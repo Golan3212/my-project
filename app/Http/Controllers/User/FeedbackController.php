@@ -32,9 +32,9 @@ class FeedbackController extends Controller
        $filename = 'dataFeedback.txt';
        $data =response()->json($request->only('author','comment'));
 
-       file_put_contents($filename, $data, FILE_APPEND);
-    // For Tests
-       return response()->json($request->only(['author','comment']));
+       $save = file_put_contents($filename, $data, FILE_APPEND);
+
+       return $save;
    }
 
 

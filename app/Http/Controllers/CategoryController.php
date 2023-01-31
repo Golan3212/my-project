@@ -1,24 +1,46 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\News;
+use Illuminate\Contracts\View\View;
+
 
 class CategoryController extends Controller
 {
-    use NewsTrait;
 
-    public function categoryNews ()
+    public function index () : View
     {
+
+        $model = new Category();
+        $categoryList = $model->getCaregory();
+        $news = new News();
+        $newsList = $news->getNews();
         return \view('news.category', [
-            'categoryNews'=> $this->getCategoryNews()
+            'categoryList' => $categoryList,
+            'newsList' => $newsList->where('category_id', '=', 1)
         ]);
     }
 
-    public function showCategoryNews (int $id)
+    public function show (int $id = null) : View
     {
+        $category = new Category();
+        $news = new News();
+
         return \view('news.categoryNews', [
-            'categoryNews'=> $this->getCategoryNews($id)
+            'category' => $category->getCategoryById($id),
+            'newsList'=> $news->getNews()
+        ]);
+    }
+
+    public function send ()
+    {
+        return \view('news.sendNews', [
+            'news'=> $this->setNews()
         ]);
     }
 }
+

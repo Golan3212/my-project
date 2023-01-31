@@ -32,9 +32,9 @@ class DownloadController extends Controller
 
         $filename = 'dataDownload.txt';
         $data =response()->json($request->only('username','phone', 'email', 'wishInfo'));
-        file_put_contents($filename, $data, FILE_APPEND);
-        //возврат ДЖсон только для теста, потом уберу
-        return response()->json($request->only(['username','phone', 'email', 'wishInfo']));
+       $save = file_put_contents($filename, $data, FILE_APPEND);
+
+        return $save;
     }
 
 }

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
 
-    <h1>Categoryp</h1>
+    <h1>Category</h1>
 
 @endsection

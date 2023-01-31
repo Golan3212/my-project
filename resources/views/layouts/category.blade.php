@@ -23,14 +23,9 @@
     <!-- Main jumbotron for a primary marketing message or call to download -->
 
     <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
             @yield('content')
-        </div>
-
         <hr>
-
-    </div> <!-- /container -->
+    </div>
 
 </main>
 

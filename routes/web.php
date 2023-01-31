@@ -37,6 +37,7 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.'], static function(){
     ->name('index');
     Route::resource('category', AdminCategoryController::class);
     Route::resource('news', AdminNewsController::class);
+    Route::resource('{id}/show', AdminNewsController::class);
 });
 //User
 Route::group(['prefix'=>'user', 'as'=>'user.'], static function(){
@@ -50,10 +51,10 @@ Route::group(['prefix'=>''], static function(){
     Route::get('/news', [NewsController::class, 'index'])
         ->name('news');
 
-    Route::get('/category', [CategoryController::class, 'categoryNews'])
+    Route::get('/category', [CategoryController::class, 'index'])
         ->name('news.category');
 
-    Route::get('/category/{id}/show', [CategoryController::class, 'showCategoryNews'])
+    Route::get('/category/{id}/show', [CategoryController::class, 'show'])
         ->name('news.categoryNews')
         ->where('id', '\d+');
 

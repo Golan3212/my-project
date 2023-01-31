@@ -2,21 +2,21 @@
 @section('content')
 
 
-@foreach ($categoryNews as $categoryNew)
+@foreach ($categoryList as $category)
     <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-3">{{$categoryNew['category']}}</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        </div>
+        <div class="container" style="width: 90%">
+            <h1 class="display-3">{{$category->title}}</h1>
+            <p>{{$category->description}}</p>
 
 
-   @foreach ($categoryNew['news'] as $newsFromCategory)
+   @foreach ($newsList as $news)
             <div class="row">
-            <h2> {{$newsFromCategory['title']}}</h2>
+            <h2> {{$news->title}}</h2>
             </div>
    @endforeach
 
-    <a href="{{route('news.categoryNews', $categoryNew['id'])}}" class="btn btn-secondary">Далее</a>
+    <a href="{{route('news.categoryNews', $category->id)}}" class="btn btn-secondary">Далее</a>
+        </div>
     </div>
 
 

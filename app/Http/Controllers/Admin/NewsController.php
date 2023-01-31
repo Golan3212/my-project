@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,11 @@ class NewsController extends Controller
      */
     public function index() : View
     {
-       return \view('admin.news.index');
+        $model = new News();
+        $newsList = $model->getNews();
+       return \view('admin.news.index', [
+           'newsList'=>$newsList
+       ]);
     }
 
     /**
@@ -45,12 +50,15 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id) :View
     {
-        //
+        $model = new News();
+       return \view('admin.news.show', [
+           'newsItem'=> $model->getNewsById($id)
+       ]);
     }
 
     /**
