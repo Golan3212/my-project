@@ -11,13 +11,10 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up():void
+    public function up()
     {
-        Schema::create('sources', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 191)->default('unknown');
-            $table->string('path')->nullable();
-            $table->timestamps();
+        Schema::table('news', static function (Blueprint $table) {
+          $table->string('image', 255)->nullable();
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down():void
     {
-        Schema::dropIfExists('news');
+        Schema::table('news', static function (Blueprint $table) {
+            $table->dropColumn('image');
+        });
     }
 };

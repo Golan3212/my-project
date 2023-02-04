@@ -4,8 +4,8 @@
     <form method="post" action="{{route('user.feedback.store')}}">
         @csrf
         <div class="form-group">
-            <label for="author">Author</label>
-            <input type="text" class="form-control" value="{{old('author')}}" name="author" id="author" placeholder="Type author">
+            <label for="username">Author</label>
+            <input type="text" class="form-control" value="{{old('author')}}" name="username" id="username" placeholder="Type name">
         </div>
         <div class="form-group">
             <label for="comment">Comment</label>

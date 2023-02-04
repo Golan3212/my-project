@@ -15,9 +15,6 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('source_id')
-                ->constrained('sources')
-                ->cascadeOnDelete();
             $table->string('title', 191);
             $table->text('description')->nullable();
             $table->timestamps();

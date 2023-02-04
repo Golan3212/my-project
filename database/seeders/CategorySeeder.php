@@ -26,7 +26,6 @@ class CategorySeeder extends Seeder
         for ($i = 1; $i <= 5; $i++){
             $data[] = [
                 'id'=> $i,
-                'source_id' => \fake()->numberBetween(1, 10),
                 'title'=> \fake()->jobTitle(),
                 'description'=>\fake()->text(50),
                 'created_at'=> \now()

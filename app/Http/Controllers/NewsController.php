@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use App\QueryBuilders\NewsQueryBuilder;
 use Illuminate\Contracts\View\View;
 
 
@@ -12,15 +13,14 @@ class NewsController extends Controller
 {
 
 
-    public function index () : View
+    public function index(
+
+        NewsQueryBuilder $newsQueryBuilder) : View
     {
 
-        $model = new News();
-        $newsList = $model->getNews();
         return \view('news.index', [
-            'newsList'=>$newsList
+            'newsList'=>$newsQueryBuilder->getNewsWithPagination()
         ]);
-
     }
 
     public function show (int $id = null) : View

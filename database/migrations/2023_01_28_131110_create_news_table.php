@@ -16,9 +16,6 @@ return new class extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')
-                ->constrained('categories')
-                ->cascadeOnDelete();
             $table->foreignId('source_id')
                 ->constrained('sources')
                 ->cascadeOnDelete();

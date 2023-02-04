@@ -3,11 +3,14 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 
+use App\Models\Category;
+use App\Models\News;
+use App\Models\Sources;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class SourceSeeder extends Seeder
+class CategoryHasNewsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,19 +19,18 @@ class SourceSeeder extends Seeder
      */
     public function run():void
     {
-        DB::table('sources')->insert($this->getData());
+        DB::table('category_has_news')->insert($this->getData());
     }
 
     private function getData():array
     {
-
+        $newsCount =  News::all('id')->count();
+        $categoryId = Category::all('id')->count();
         $data = [];
-        for ($i = 1; $i <= 10; $i++){
+        for ($i = 1; $i <= $newsCount; $i++){
             $data[] = [
-                'id'=> $i,
-                'name'=>\fake()->jobTitle(),
-                'path' => \fake()->filePath(),
-                'created_at'=> \now()
+                'category_id' => \fake()->numberBetween(1, $categoryId),
+                'news_id' =>$i,
             ];
         }
         return $data;

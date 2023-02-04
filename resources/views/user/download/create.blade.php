@@ -15,8 +15,8 @@
             <input type="email" class="form-control" value="{{old('email')}}" name="email" id="email" placeholder="Type email">
         </div>
         <div class="form-group">
-            <label for="wishInfo">Type what you want to get</label>
-            <textarea class="form-control" name="wishInfo"  id="wishInfo" rows="3">{{old('wishInfo')}}</textarea>
+            <label for="comment_to_get">Type what you want to get</label>
+            <textarea class="form-control" name="comment_to_get"  id="comment_to_get" rows="3">{{old('comment_to_get')}}</textarea>
         </div>
         <button type="submit" class="btn btn-primary mb-2 btn-success">Send</button>
     </form>

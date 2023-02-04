@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Sources extends Model
+class Source extends Model
 {
     use HasFactory;
 
@@ -14,13 +14,13 @@ class Sources extends Model
 
 
 
-    public function getSources()
+    public function getSource()
     {
-        return DB::table($this->table)->select(['id',  'category', 'news', 'source', 'path'])->get();
+        return DB::table($this->table)->select(['id', 'name', 'path'])->get();
     }
 
     public function getSourceById(int $id)
     {
-        return DB::table($this->table)->find($id, ['id',  'category', 'news', 'source', 'path']);
+        return DB::table($this->table)->find($id, ['id', 'name', 'path']);
     }
 }

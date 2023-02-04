@@ -28,7 +28,6 @@ class  NewsSeeder extends Seeder
             for ($k = 1; $k <= $quantityCategoryNews; $k++) {
                 $data[] =
                     [
-                        'category_id' => $i,
                         'source_id' => \fake()->numberBetween(1, 10),
                         'title'=> \fake()->jobTitle(),
                         'author'=> \fake()->userName(),
