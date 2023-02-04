@@ -89,7 +89,6 @@ class FeedbackController extends Controller
      */
     public function update(Request $request, FeedBack $feedback) :RedirectResponse
     {
-        dd($feedback);
         $feedback = $feedback->fill($request->except('_token', 'id'));
         if ($feedback->save())
         {
