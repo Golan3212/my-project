@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class DownloadData extends Model
 {
+
     use HasFactory;
 
     protected $table= 'download_data';

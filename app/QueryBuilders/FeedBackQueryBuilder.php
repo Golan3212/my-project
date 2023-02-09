@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\QueryBuilders;
 
 
@@ -16,8 +17,6 @@ final class FeedBackQueryBuilder extends QueryBuilder
     {
         $this->model = FeedBack::query();
     }
-
-
 
     public function getAll(): Collection
     {

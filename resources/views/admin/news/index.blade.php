@@ -33,7 +33,7 @@
                             <td>{{$news->sources->name}}</td>
                             <td>
                                 <a href="{{route('admin.news.edit', ['news'=>$news])}}" style="color: #007bff; padding: 5px" > Edit</a>
-                                <a href="" style="padding: 5px; color: darkred">Delete</a>
+                                <a href="javascript:;" class="delete" rel="{{$news->id}}" style="padding: 5px; color: darkred">Delete</a>
                             </td>
                         </tr>
                     @empty
@@ -51,3 +51,36 @@
 
 
 @endsection
+
+@push('js')
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            let elements = document.querySelectorAll(".delete");
+            elements.forEach(function (e, k) {
+                e.addEventListener("click", function () {
+                    const id = this.getAttribute('rel');
+                    if (confirm(`R u sure about delete news with #ID = ${id}`)) {
+                        deleteItem(`news/${id}`).then(() => {
+                            location.reload();
+                        });
+                    }else{
+                        alert('Delete decline');
+                    }
+                })
+
+            })
+        })
+
+        async function deleteItem(url) {
+            let response = await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            });
+            let result = await response.json();
+            return result.ok;
+        }
+    </script>
+@endpush
+

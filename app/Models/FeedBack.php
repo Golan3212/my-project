@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,9 +10,6 @@ use Illuminate\Support\Facades\DB;
 class FeedBack extends Model
 {
     use HasFactory;
-
-
-
 
     /**
      * @var \Illuminate\Database\Eloquent\Collection|mixed

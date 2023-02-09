@@ -1,12 +1,11 @@
 <?php
 declare(strict_types=1);
-namespace Database\Seeders;
 
+namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\News;
 use App\Models\Sources;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 

@@ -1,13 +1,15 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Feedback\CreateRequest;
+use App\Http\Requests\Feedback\EditRequest;
 use App\Models\FeedBack;
 use App\QueryBuilders\FeedBackQueryBuilder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
 {
@@ -26,7 +28,8 @@ class FeedbackController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param FeedBackQueryBuilder $feedBackQueryBuilder
+     * @return View
      */
     public function create(FeedBackQueryBuilder $feedBackQueryBuilder): View
     {
@@ -52,12 +55,13 @@ class FeedbackController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param Request $request
+     * @param CreateRequest $request
      * @return RedirectResponse
      */
-   public function store(Request $request): RedirectResponse
+   public function store(CreateRequest $request): RedirectResponse
    {
-       $feedback = new FeedBack($request->except('_token'));
+       $feedback = FeedBack::create($request->validated());
+
        if ($feedback->save())
        {
            return redirect()->route('user.feedback.index')->with('success', 'feedback sent');
@@ -83,21 +87,20 @@ class FeedbackController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param EditRequest $request
      * @param FeedBack $feedback
      * @return RedirectResponse
      */
-    public function update(Request $request, FeedBack $feedback) :RedirectResponse
+    public function update(EditRequest $request, FeedBack $feedback) :RedirectResponse
     {
-        $feedback = $feedback->fill($request->except('_token', 'id'));
-        if ($feedback->save())
+        $feedback = $feedback->fill($request->validated());
+        if ($feedback)
         {
             $feedback->update($request->input());
             return redirect()->route('user.feedback.index')->with('success', 'News updated');
         }
 
         return \back()->with('error', 'News not updated');
-
     }
 
     /**

@@ -31,7 +31,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <a href="{{route('user.download.edit', ['download' => $downloadItem])}}" type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
-                                    <a type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                                    <a href="javascript:;"  rel="{{$downloadItem->id}}" class="delete btn btn-sm btn-outline-secondary">Delete</a>
                                 </div>
                                 <small class="text-muted">{{$downloadItem->created_at}}</small>
                             </div>
@@ -47,3 +47,35 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            let elements = document.querySelectorAll(".delete");
+            elements.forEach(function (e, k) {
+                e.addEventListener("click", function () {
+                    const id = this.getAttribute('rel');
+                    if (confirm(`R u sure about delete request with #ID = ${id}`)) {
+                        deleteItem(`download/${id}`).then(() => {
+                            location.reload();
+                        });
+                    }else{
+                        alert('Delete decline');
+                    }
+                })
+
+            })
+        })
+
+        async function deleteItem(url) {
+            let response = await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            });
+            let result = await response.json();
+            return result.ok;
+        }
+    </script>
+@endpush

@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\QueryBuilders;
 
 
@@ -17,12 +18,11 @@ final class DownloadDataQueryBuilder extends QueryBuilder
         $this->model = DownloadData::query();
     }
 
-
-
     public function getAll(): Collection
     {
         return DownloadData::query()->get();
     }
+
     public function getRequestById ($id): Builder
     {
         return DownloadData::query()->where('id', '=', $id);

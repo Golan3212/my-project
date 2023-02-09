@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
@@ -12,12 +11,8 @@ use Illuminate\Contracts\View\View;
 class NewsController extends Controller
 {
 
-
-    public function index(
-
-        NewsQueryBuilder $newsQueryBuilder) : View
+    public function index(NewsQueryBuilder $newsQueryBuilder) : View
     {
-
         return \view('news.index', [
             'newsList'=>$newsQueryBuilder->getNewsWithPagination()
         ]);

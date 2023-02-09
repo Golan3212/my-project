@@ -1,0 +1,52 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Http\Requests\DownloadData;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class EditRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
+     */
+    public function rules(): array
+    {
+        return [
+            'username' => ['required', 'string', 'min:3', 'max:50'],
+            'phone' => ['required', 'numeric'],
+            'email' => ['required'],
+            'comment_to_get' => ['required', 'string']
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'username' => 'Имя',
+            'comment_to_get' => 'комментарий',
+            'phone' => 'телефон',
+            'email' => 'электронная почта'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'нужно заполнить поле :attribute',
+            'nullable' => 'Подозрительно короткий :attribute'
+        ];
+    }
+}

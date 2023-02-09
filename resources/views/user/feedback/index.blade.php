@@ -11,8 +11,8 @@
                             <p>{{$feedbackItem->comment}}</p>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex flex-row align-items-center">
-                                    <p class="small mb-0 ms-2">{{$feedbackItem->username}}</p>
-                                    <a href="{{route('user.feedback.edit', ['feedback' => $feedbackItem])}}">Edit</a>
+                                        <p class="small mb-0 ms-2">{{$feedbackItem->username}}</p>
+                                        <a href="{{route('user.feedback.edit', ['feedback' => $feedbackItem])}}">Edit</a>
                                 </div>
                             </div>
                         </div>
