@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models;
@@ -6,7 +7,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
@@ -28,7 +28,8 @@ class News extends Model
         'description',
     ];
     protected $casts = [
-      'categories_id' => 'array'
+        'categories_id' => 'array',
+        'source_id' => 'int'
     ];
 
     protected function author() : Attribute
@@ -44,18 +45,8 @@ class News extends Model
         return $this->belongsToMany(Category::class, 'category_has_news', 'news_id', 'category_id');
     }
 
-    public function sources(): BelongsTo
+    public function sources(): BelongsToMany
     {
-        return $this->belongsTo(Source::class, 'source_id', 'id');
+        return $this->belongsToMany(Source::class, 'source_has_news', 'news_id', 'source_id');
     }
-
-//    public function getNews()
-//    {
-//        return DB::table($this->table)->select(['id', 'category_id', 'title', 'author', 'status', 'description', 'created_at'])->get();
-//    }
-//
-//    public function getNewsById(int $id)
-//    {
-//        return DB::table($this->table)->find($id, ['id', 'category_id', 'title', 'author', 'status', 'description', 'created_at']);
-//    }
 }

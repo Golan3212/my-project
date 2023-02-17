@@ -16,9 +16,6 @@ return new class extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('source_id')
-                ->constrained('sources')
-                ->cascadeOnDelete();
             $table->string('title', 191);
             $table->string('author', 191)->default('Admin');
             $table->text('description')->nullable();

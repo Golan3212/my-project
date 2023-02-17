@@ -30,7 +30,7 @@
                             <td>{{$news->status}}</td>
                             <td>{{$news->description}}</td>
                             <td>{{$news->created_at}}</td>
-                            <td>{{$news->sources->name}}</td>
+                            <td>{{$news->sources->map(fn($item) => $item->name)->implode(",")}}</td>
                             <td>
                                 <a href="{{route('admin.news.edit', ['news'=>$news])}}" style="color: #007bff; padding: 5px" > Edit</a>
                                 <a href="javascript:;" class="delete" rel="{{$news->id}}" style="padding: 5px; color: darkred">Delete</a>

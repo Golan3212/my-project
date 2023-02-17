@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\Feedback;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,23 +26,16 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['required', 'string', 'min:3', 'max:50'],
-            'comment' => ['required', 'string']
+            'is_admin' => ['required', 'boolean'],
+            'name' => ['required', 'string'],
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required','string', 'min:5', 'max:20']
         ];
     }
 
-    public function attributes()
+    public function getUserContacts () : array
     {
-        return [
-            'username' => 'Имя',
-            'comment' => 'Комментарий'
-        ];
+        return (array)  $this->validated(['name', 'email']);
     }
 
-    public function messages()
-    {
-        return [
-            'required' => 'нужно заполнить поле :attribute'
-        ];
-    }
 }

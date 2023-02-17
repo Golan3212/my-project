@@ -43,6 +43,7 @@
     feather.replace()
 </script>
 @stack('js')
+@stack('js2')
 <!-- Graphs -->
 
 </body>

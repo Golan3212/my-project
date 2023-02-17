@@ -25,6 +25,16 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="source_id">Source</label>
+            <select class="form-control"  name="source_id" id="source_id">
+            <option value="0">--Select--</option>
+            @foreach($sources as $source)
+                <option value="{{ $source->id }}">{{$source->name}}
+                </option>
+            @endforeach
+        </select>
+        </div>
+        <div class="form-group">
             <label for="author">Author</label>
             <input type="text" class="form-control" value="{{$news->author}}" name="author" id="author" placeholder="Type author">
         </div>

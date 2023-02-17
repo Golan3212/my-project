@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\User;
@@ -11,7 +12,6 @@ use App\QueryBuilders\DownloadDataQueryBuilder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class DownloadController extends Controller
 {
@@ -92,6 +92,7 @@ class DownloadController extends Controller
     public function update(EditRequest $request, DownloadData $download) :RedirectResponse
     {
         $download = $download->fill($request->validated());
+
         if ($download)
         {
             $download->update($request->input());

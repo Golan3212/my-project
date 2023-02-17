@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Category;
 use App\Models\News;
+use App\Models\Source;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class CategoryHasNewsSeeder extends Seeder
+class SourceHasNewsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,17 +18,17 @@ class CategoryHasNewsSeeder extends Seeder
      */
     public function run():void
     {
-        DB::table('category_has_news')->insert($this->getData());
+        DB::table('source_has_news')->insert($this->getData());
     }
 
     private function getData():array
     {
         $newsCount =  News::all('id')->count();
-        $categoryId = Category::all('id')->count();
+        $sourceId = Source::all('id')->count();
         $data = [];
         for ($i = 1; $i <= $newsCount; $i++){
             $data[] = [
-                'category_id' => \fake()->numberBetween(1, $categoryId),
+                'source_id' => \fake()->numberBetween(1, $sourceId),
                 'news_id' =>$i,
             ];
         }

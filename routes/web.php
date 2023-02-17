@@ -1,14 +1,18 @@
 <?php
 
+use App\Http\Controllers\Account\IndexController as Account;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\IndexController as Admin;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\User\IndexController as User;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\User\DownloadController;
 use App\Http\Controllers\User\FeedbackController;
-use App\Http\Controllers\User\IndexController as User;
-use App\Http\Controllers\WelcomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +25,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [WelcomeController::class, 'welcome'])
+Route::get('/', function (){
+    return view('welcome');
+})
     ->name('main');
 
 Route::get('/sendNews', [NewsController::class, 'send'])
@@ -31,14 +37,20 @@ Route::get('/info/{project}', static function(string $project):string {
     return "About {$project}";
 });
 
-//admin
-Route::group(['prefix'=>'admin', 'as'=>'admin.'], static function(){
-    Route::get('/', Admin::class)
-    ->name('index');
-    Route::resource('category', AdminCategoryController::class);
-    Route::resource('news', AdminNewsController::class);
-    Route::resource('{id}/show', AdminNewsController::class);
+Route::group(['middleware' =>'auth'], static function() {
+    Route::get('/logout', [LoginController::class, 'logout'])
+        ->name('account.logout');
+    Route::get('/account', Account::class)->name('account');
+    Route::group(['prefix'=>'admin', 'as'=>'admin.', 'middleware' => 'is.admin'], static function(){
+        Route::get('/', Admin::class)
+            ->name('index');
+        Route::resource('user', AdminUserController::class);
+        Route::resource('category', AdminCategoryController::class);
+        Route::resource('news', AdminNewsController::class);
+        Route::resource('{id}/show', AdminNewsController::class);
+    });
 });
+
 //User
 Route::group(['prefix'=>'user', 'as'=>'user.'], static function(){
     Route::get('/', User::class)
@@ -63,3 +75,7 @@ Route::group(['prefix'=>''], static function(){
         ->where('id', '\d+');
 });
 
+
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');

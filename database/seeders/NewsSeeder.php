@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Seeders;
@@ -28,7 +29,6 @@ class  NewsSeeder extends Seeder
             for ($k = 1; $k <= $quantityCategoryNews; $k++) {
                 $data[] =
                     [
-                        'source_id' => \fake()->numberBetween(1, 10),
                         'title'=> \fake()->jobTitle(),
                         'author'=> \fake()->userName(),
                         'status'=> NewsStatus::DRAFT->value,

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\User;
@@ -94,6 +95,7 @@ class FeedbackController extends Controller
     public function update(EditRequest $request, FeedBack $feedback) :RedirectResponse
     {
         $feedback = $feedback->fill($request->validated());
+
         if ($feedback)
         {
             $feedback->update($request->input());

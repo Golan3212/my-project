@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
@@ -10,6 +11,7 @@ use App\Http\Requests\News\EditRequest;
 use App\Models\News;
 use App\QueryBuilders\CategoryQueryBuilder;
 use App\QueryBuilders\NewsQueryBuilder;
+use App\QueryBuilders\SourceQueryBuilder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -35,14 +37,16 @@ class NewsController extends Controller
      *
      * @param News $news
      * @param CategoryQueryBuilder $categoryQueryBuilder
+     * @param SourceQueryBuilder $sourceQueryBuilder
      * @return View
      */
-    public function create(News $news, CategoryQueryBuilder $categoryQueryBuilder,): View
+    public function create(News $news, CategoryQueryBuilder $categoryQueryBuilder, SourceQueryBuilder $sourceQueryBuilder): View
     {
         return \view('admin.news.create',[
             'news' => $news,
             'categories' => $categoryQueryBuilder->getAll(),
-            'statusList' => NewsStatus::all()
+            'statusList' => NewsStatus::all(),
+            'sources' => $sourceQueryBuilder->getAll()
         ]);
     }
 
@@ -58,6 +62,8 @@ class NewsController extends Controller
 
         if ($news)
         {
+            $news->categories()->attach($request->getCategoryIds());
+            $news->sources()->attach($request->getSourceId());
             return redirect()->route('admin.news.index')->with('success', __('messages.admin.news.success'));
         }
 
@@ -68,7 +74,7 @@ class NewsController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function show(int $id) :View
     {
@@ -83,13 +89,15 @@ class NewsController extends Controller
      *
      * @param News $news
      * @param CategoryQueryBuilder $categoryQueryBuilder
+     * @param SourceQueryBuilder $sourceQueryBuilder
      * @return View
      */
-    public function edit(News $news, CategoryQueryBuilder $categoryQueryBuilder): View
+    public function edit(News $news, CategoryQueryBuilder $categoryQueryBuilder, SourceQueryBuilder $sourceQueryBuilder): View
     {
         return \view('admin.news.edit',[
             'news' => $news,
             'categories' => $categoryQueryBuilder->getAll(),
+            'sources' => $sourceQueryBuilder->getAll(),
             'statusList' => NewsStatus::all()
         ]);
     }
@@ -104,9 +112,11 @@ class NewsController extends Controller
     public function update(EditRequest $request, News $news) :RedirectResponse
     {
         $news = $news->fill($request->validated());
-        if ($news)
+
+        if ($news->save())
         {
             $news->categories()->sync($request->getCategoryIds());
+            $news->sources()->sync($request->getSourceId());
             return redirect()->route('admin.news.index')->with('success', 'News updated');
         }
 

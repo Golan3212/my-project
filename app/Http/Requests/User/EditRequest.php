@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\DownloadData;
+namespace App\Http\Requests\User;
+
 
 use Illuminate\Foundation\Http\FormRequest;
+
 
 class EditRequest extends FormRequest
 {
@@ -26,28 +28,27 @@ class EditRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['required', 'string', 'min:3', 'max:50'],
-            'phone' => ['required', 'numeric'],
-            'email' => ['required'],
-            'comment_to_get' => ['required', 'string']
+            'is_admin' => ['nullable']
         ];
     }
 
     public function attributes()
     {
         return [
-            'username' => 'Имя',
-            'comment_to_get' => 'комментарий',
-            'phone' => 'телефон',
-            'email' => 'электронная почта'
+            'is_admin' => 'Админство',
+            'email' => 'почта'
         ];
     }
 
     public function messages()
     {
         return [
-            'required' => 'нужно заполнить поле :attribute',
-            'nullable' => 'Подозрительно короткий :attribute'
+            'required' => 'нужно заполнить поле :attribute'
         ];
+    }
+
+    public function getIsAdmin ()
+    {
+        return $this->validated('is_admin');
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Seeders;
@@ -20,7 +21,6 @@ class SourceSeeder extends Seeder
 
     private function getData():array
     {
-
         $data = [];
         for ($i = 1; $i <= 10; $i++){
             $data[] = [
