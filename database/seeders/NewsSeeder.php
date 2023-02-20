@@ -20,8 +20,10 @@ class  NewsSeeder extends Seeder
         DB::table('news')->insert($this->getData());
     }
 
-    private function getData():array
+
+    public function getData():array
     {
+
         $data = [];
         $quantityCategoryNews = 10;
         $quantityCategory = DB::table('categories')->max('id');

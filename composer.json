@@ -9,9 +9,13 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
+        "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
-        "maximebf/debugbar": ">=1.0.0"
+        "maximebf/debugbar": ">=1.0.0",
+        "orchestra/parser": "*",
+        "socialiteproviders/facebook": "^4.1",
+        "socialiteproviders/vkontakte": "^5.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

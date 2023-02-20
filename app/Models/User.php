@@ -47,6 +47,10 @@ class User extends Authenticatable
         'is_admin' => 'int',
     ];
 
+    protected $dates = [
+        'last_login_at'
+    ];
+
     public function getUserInfo ($id)
     {
         return User::query()->where('id', $id)->get();
