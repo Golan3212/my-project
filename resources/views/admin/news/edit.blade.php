@@ -7,7 +7,7 @@
     @endif
 
         <h1>Edit news</h1>
-    <form method="post" action="{{route('admin.news.update', ['news'=>$news])}}">
+    <form method="post" action="{{route('admin.news.update', ['news'=>$news])}} " enctype="multipart/form-data">
         @csrf
         @method('put')
         <div>
@@ -57,5 +57,16 @@
         </div>
         <button type="submit" class="btn btn-primary mb-2 btn-success">Send</button>
     </form>
-
 @endsection
+@push('js')
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#description' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+
+
+@endpush

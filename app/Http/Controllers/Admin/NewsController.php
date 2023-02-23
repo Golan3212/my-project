@@ -12,9 +12,11 @@ use App\Models\News;
 use App\QueryBuilders\CategoryQueryBuilder;
 use App\QueryBuilders\NewsQueryBuilder;
 use App\QueryBuilders\SourceQueryBuilder;
+use App\Services\UploadService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use function Symfony\Component\String\s;
 
 
 class NewsController extends Controller
@@ -109,11 +111,15 @@ class NewsController extends Controller
      * @param News $news
      * @return RedirectResponse
      */
-    public function update(EditRequest $request, News $news) :RedirectResponse
+    public function update(EditRequest $request, News $news, UploadService $uploadService) :RedirectResponse
     {
-        $news = $news->fill($request->validated());
+        $validated = $request->validated();
+        $news = $news->fill($validated);
 
-        if ($news->save())
+        if ($request->hasFile('image')){
+            $validated['image'] = $uploadService->uploadImage($request->file('image'));
+        }
+        if ($news->update($validated))
         {
             $news->categories()->sync($request->getCategoryIds());
             $news->sources()->sync($request->getSourceId());

@@ -21,4 +21,9 @@ final class SourceQueryBuilder extends QueryBuilder
     {
         return Source::query()->get();
     }
+
+    function getPath()
+    {
+        return Source::query()->get('path');
+    }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\IndexController as Admin;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ParserController;
+use App\Http\Controllers\Admin\SourceController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\SocialProvidersController;
 use App\Http\Controllers\User\IndexController as User;
@@ -51,6 +52,7 @@ Route::group(['middleware' =>'auth'], static function() {
         Route::resource('user', AdminUserController::class);
         Route::resource('category', AdminCategoryController::class);
         Route::resource('news', AdminNewsController::class);
+        Route::resource('source', SourceController::class);
         Route::resource('{id}/show', AdminNewsController::class);
     });
 });
@@ -74,7 +76,7 @@ Route::group(['prefix'=>''], static function(){
         ->name('news.categoryNews')
         ->where('id', '\d+');
 
-    Route::get('/news/{id}/show', [NewsController::class, 'show'])
+    Route::get('/news/{news}/show', [NewsController::class, 'show'])
         ->name('news.show')
         ->where('id', '\d+');
 });

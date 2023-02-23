@@ -24,6 +24,8 @@ class News extends Model
         'title',
         'author',
         'link',
+        'guid',
+        'pubDate',
         'status',
         'image',
         'description',

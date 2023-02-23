@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\News;
 use App\Models\Source;
+use App\QueryBuilders\NewsQueryBuilder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -26,10 +27,13 @@ class SourceHasNewsSeeder extends Seeder
         $newsCount =  News::all('id')->count();
         $sourceId = Source::all('id')->count();
         $data = [];
-        for ($i = 1; $i <= $newsCount; $i++){
+       $news = News::all('id');
+       $source = Source::all('id');
+
+        for ($i = 1; $i <= $news->count(); $i++){
             $data[] = [
-                'source_id' => \fake()->numberBetween(1, $sourceId),
-                'news_id' =>$i,
+                'source_id' => $source->where(),
+                'news_id' => $i,
             ];
         }
         return $data;

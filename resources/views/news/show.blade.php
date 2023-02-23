@@ -1,4 +1,3 @@
-
 @extends('layouts.main')
 @section('content')
     <div class="blog-post">

@@ -14,14 +14,17 @@ class Category extends Model
     use HasFactory;
 
     protected $table = 'categories';
+    protected $fillable = [
+        'title',
+    ];
 
     public function getCaregory()
     {
-        return DB::table($this->table)->select(['id',  'title', 'description', 'created_at'])->get();
+        return DB::table($this->table)->select(['id',  'title', 'created_at'])->get();
     }
 
     public function getCategoryById(int $id)
     {
-        return DB::table($this->table)->find($id, ['id',  'title', 'description', 'created_at']);
+        return DB::table($this->table)->find($id, ['id',  'title', 'created_at']);
     }
 }

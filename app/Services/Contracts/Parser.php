@@ -15,5 +15,6 @@ interface Parser
     /**
      * @return void
      */
-    public function getParseData();
+
+    public function saveParseData():void;
 }

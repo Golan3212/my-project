@@ -28,7 +28,7 @@
                             <td>{{$news->title}}</td>
                             <td>{{$news->author}}</td>
                             <td>{{$news->status}}</td>
-                            <td>{{$news->description}}</td>
+                            <td>{!! $news->description !!}</td>
                             <td>{{$news->created_at}}</td>
                             <td>{{$news->sources->map(fn($item) => $item->name)->implode(",")}}</td>
                             <td>

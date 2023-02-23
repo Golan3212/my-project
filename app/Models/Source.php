@@ -15,6 +15,11 @@ class Source extends Model
 
     protected $table = 'sources';
 
+    protected $fillable = [
+        'name',
+        'path',
+    ];
+
     public function getSource()
     {
         return DB::table($this->table)->select(['id', 'name', 'path'])->get();

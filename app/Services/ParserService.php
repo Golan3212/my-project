@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\News;
-use App\QueryBuilders\NewsQueryBuilder;
 use App\Services\Contracts\Parser;
+use Illuminate\Support\Facades\Storage;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ParserService implements Parser
@@ -20,7 +20,7 @@ class ParserService implements Parser
         return $this;
     }
 
-    public function getParseData()
+    public function saveParseData(): void
     {
         $xml = XmlParser::load($this->link);
         $data = $xml->parse([
@@ -41,18 +41,21 @@ class ParserService implements Parser
             ],
         ]);
 
-        $queryNews = new NewsQueryBuilder;
-
-           foreach ($data["news"] as $news){
-            News::create([
-                'title' => $news['title'],
-                'link' => $news['link'],
-                'description' => $news['description'],
-                'created_at' => $news['pubDate']
-            ]);
+        foreach ($data["news"] as $news) {
+            $e = \explode('/', $this->link);
+            $fileName = end($e);
+            $jsonEncode = json_encode($data);
+            Storage::append('news/' . $fileName, $jsonEncode);
         }
 
-        return $data;
+        foreach ($data["news"] as $news){
+                News::create([
+                    'title' => $news['title'],
+                    'link' => $news['link'],
+                    'guid' => $news['guid'],
+                    'description' => $news['description'],
+                    'pubDate' => $news['pubDate']
+                ]);
+        }
     }
-
 }

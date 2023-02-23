@@ -15,7 +15,6 @@
                             News
                         </a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link @if(request()->routeIs('admin.user.*')) active @endif" href="{{route('admin.user.index')}}">
                             <span data-feather="users"></span>
@@ -26,6 +25,12 @@
                         <a class="nav-link @if(request()->routeIs('admin.category.index')) active @endif" href="{{route('admin.category.index')}}">
                             <span data-feather="layers"></span>
                             Categories
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if(request()->routeIs('admin.source.*')) active @endif" href="{{route('admin.source.index')}}">
+                            <span data-feather="arrow-down-circle"></span>
+                            Sources
                         </a>
                     </li>
                 </ul>

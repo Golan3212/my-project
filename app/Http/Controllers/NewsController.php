@@ -19,11 +19,10 @@ class NewsController extends Controller
         ]);
     }
 
-    public function show (int $id = null) : View
+    public function show (News $news) :View
     {
-        $newsItem = new News();
        return \view('news.show', [
-           'news'=> $newsItem->getNewsById($id)
+           'news'=> $news,
        ]);
     }
 

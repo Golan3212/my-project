@@ -27,7 +27,6 @@ class CategorySeeder extends Seeder
             $data[] = [
                 'id'=> $i,
                 'title'=> \fake()->jobTitle(),
-                'description'=>\fake()->text(50),
                 'created_at'=> \now()
             ];
         }
